@@ -6,12 +6,14 @@
 
 
 
-### <center>Zugestellt v1
+### <center>Zugestellt v1 / v2
 <p align="center">
 <img src="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/zustellung_v1.png?raw=true" alt="zugestellt_v1">
+<img src="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/zugestellt_v2.png?raw=true" alt="zugestellt_v2">
+
 </p>
 
-### Zugestellt v2
+### Gelievert v1 / v2
 <p align="center">
-<img src="https://" alt="zugestellt_v2">
+<img src="https://" alt="geliefert_v2">
 </p> 
