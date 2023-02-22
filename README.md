@@ -8,6 +8,10 @@
 
 ### <center><a href="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/zugestellt_v1">Zugestellt_v1</a> | <a href="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/zugestellt_v2">Zugestellt_v2</a>
 
+
+![logo](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/zugestellt_v1.png)
+![logo](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/zugestellt.png)
+
 <p align="center">
 <img src="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/zugestellt_v1.png?raw=true" alt="zugestellt_v1">
 <img src="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/zugestellt.png?raw=true" alt="zugestellt">
