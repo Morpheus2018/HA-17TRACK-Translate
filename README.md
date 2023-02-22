@@ -18,3 +18,12 @@
 <img src="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/in_zustellung_v2.png?raw=true" alt="in_zustellung_v1">
 <img src="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/in_zustellung_v1.png?raw=true" alt="in_zustellung_v2">
 </p> 
+
+## Paket in Zustellung
+### Passe oder Ergänze weitere Ereignisse zu deiner Paketverfolgung
+
+v1
+replace("Englisch", "Deutsch.")| 
+
+v2 
+{% elif info_text == "Englisch"%}Deutsch.
