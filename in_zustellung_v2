@@ -1,0 +1,19 @@
+type: markdown
+content: |
+  ## <center> Paket in Zustellung
+  ***
+  {% for package in states.sensor.seventeentrack_packages_in_transit.attributes.packages %}
+  **{{ package.friendly_name }} ({{ package.tracking_number }}):**
+  {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.{% set info_text = state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[0]['info_text'] %}
+  {% if info_text == "The shipment has been loaded onto the delivery vehicle" %}Die Sendung wurde in das Zustellfahrzeug geladen.
+  {% elif info_text == "The shipment has been processed in the parcel center of origin"%}Die Sendung wurde im Ursprungspaketzentrum bearbeitet.
+  {% elif info_text == "The shipment arrived in the region of recipient and will be transported to the delivery base in the next step"%}Die Sendung ist in der Empfängerregion angekommen und wird im nächsten Schritt zur Zustellbasis transportiert.
+  {% elif info_text == "The shipment has been processed in the parcel center of origin"%}Die Sendung wurde im Ursprungspaketzentrum bearbeitet.
+  {% elif info_text == "Pick-up was successful"%}Die Sendung wurde abgeholt.
+  {% elif info_text == "The shipment has been posted by the sender at the retail outlet"%}Die Sendung wurde vom Absender in der Filiale eingeliefert.
+  {% elif info_text == "The instruction data for this shipment have been provided by the sender to DHL electronically"%}Die Auftragsdaten für diese Sendung wurden vom Absender elektronisch an DHL übermittelt.
+  {% elif info_text == "Departed from facility"%}Einrichtung verlassen.
+  {% elif info_text == "The parcel data was entered into GLS IT system; the parcel was not yet handed over to GLS"%}Die Paketdaten wurden in das IT-System von GLS eingegeben; das Paket wurde noch nicht an GLS übergeben.
+  {% else %}Keine Packete{% endif %}
+  ***
+   {% endfor %}

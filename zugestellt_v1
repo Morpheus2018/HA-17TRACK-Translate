@@ -8,5 +8,5 @@ content: |
   ***
   {% endfor %}
   {% else %}
-  Keine Pakete.
+   Keine Pakete.
   {% endif %}
