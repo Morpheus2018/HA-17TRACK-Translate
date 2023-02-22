@@ -1,4 +1,4 @@
-# <center> HA-Translate-17TRACK-Translate
+# <center> HA-17TRACK-Translate
 
 <center> Home Assistant Tamplate Markdown Übersetzung für 17TRACK 
 
