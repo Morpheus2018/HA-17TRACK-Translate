@@ -9,11 +9,11 @@
 ### <center><a href="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/zugestellt_v1">Zugestellt_v1</a> | <a href="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/zugestellt_v2">Zugestellt_v2</a>
 
 
-![logo](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/zugestellt_v1.png)
-![logo](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/zugestellt.png)
+![zugestellt_v1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/zugestellt_v1.png)
+![zugestellt](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/zugestellt.png)
 
 
-### <center><a href="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/in_zustellung_v1">In Zustellung_v1</a> | <a href="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/in_zustellung_v2">In Zustellung_v2</a>
+### <a href="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/in_zustellung_v1">In Zustellung_v1</a> | <a href="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/in_zustellung_v2">In Zustellung_v2</a>
 <p align="center">
 <img src="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/in_zustellung_v2.png?raw=true" alt="in_zustellung_v1">
 <img src="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/in_zustellung_v1.png?raw=true" alt="in_zustellung_v2">
