@@ -22,8 +22,11 @@
 ## Paket in Zustellung
 ### Passe oder Ergänze weitere Ereignisse zu deiner Paketverfolgung
 
-v1
+v1 
+```
 replace("Englisch", "Deutsch.")| 
-
+```
 v2 
-{% elif info_text == "Englisch"%}Deutsch.
+```
+{% elif info_text == "Englisch"%}Deutsch. 
+```
