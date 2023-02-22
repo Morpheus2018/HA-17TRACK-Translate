@@ -7,7 +7,7 @@
 
 
 ### <center>Zugestellt v1 / v2
-<p align="left">
+<p align="center">
 <img src="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/zustellung_v1.png?raw=true" alt="zugestellt_v1">
 <img src="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/zugestellt_v2.png?raw=true" alt="zugestellt_v2">
 
