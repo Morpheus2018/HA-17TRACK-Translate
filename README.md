@@ -1,6 +1,6 @@
 # HA-17TRACK-Translate
 
-[Home Assistant](https://www.home-assistant.io/) Tamplate Markdown Übersetzung für [17TRACK](https://www.home-assistant.io/integrations/seventeentrack) integration
+[Home Assistant](https://www.home-assistant.io/) Tamplate Markdown Übersetzung für [17TRACK](https://www.home-assistant.io/integrations/seventeentrack) Integration
 
 ## Preview
 
