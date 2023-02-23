@@ -22,7 +22,7 @@ replace("Englisch", "Deutsch.")|
 ```
 {% elif info_text == "Englisch"%}Deutsch. 
 ```
-### Test mit Integration [Google Translate Text-to-Speech](https://www.home-assistant.io/integrations/google_translate/) 
+### Test mit [Google Translate Text-to-Speech](https://www.home-assistant.io/integrations/google_translate/) Integration.
 #### Automatische erkennen und Übersetzen. Um Text-to-Speech mit Google zu aktivieren, fügen Sie Ihrer configuration.yaml die folgenden Zeilen hinzu: 
 ```
 tts:
