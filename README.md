@@ -1,13 +1,10 @@
-# <center> HA-17TRACK-Translate
+# HA-17TRACK-Translate
 
-<center> Home Assistant Tamplate Markdown Übersetzung für 17TRACK 
+[Home Assistant](https://www.home-assistant.io/) Tamplate Markdown Übersetzung für [17TRACK](https://www.17track.net/de) 
 
-## <center> Preview
+## Preview
 
-
-
-### <center><a href="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/zugestellt_v1">Zugestellt_v1</a> | <a href="https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/zugestellt_v2">Zugestellt_v2</a>
-
+### [Zugestellt_v1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/zugestellt_v1) | [Zugestellt_v2](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/zugestellt_v2)
 
 ![zugestellt_v1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/zugestellt_v1.png)
 ![zugestellt](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/zugestellt.png)
