@@ -22,12 +22,6 @@ replace("Englisch", "Deutsch.")|
 ```
 {% elif info_text == "Englisch"%}Deutsch. 
 ```
-### Test mit [Google Translate Text-to-Speech](https://www.home-assistant.io/integrations/google_translate/) Integration.
-#### Automatische erkennen und Übersetzen. Um Text-to-Speech mit Google zu aktivieren, fügen Sie Ihrer configuration.yaml die folgenden Zeilen hinzu: 
-```
-tts:
-  - platform: google_translate
-    language: "de"
-    tld: com 
-```
+### Test mit Google Translate
+#### Automatische erkennen und Übersetzen. 
 ### [In Zustellung Google](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/in_zustellun_google) 
