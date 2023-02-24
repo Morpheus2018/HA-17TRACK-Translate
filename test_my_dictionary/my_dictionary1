@@ -1,0 +1,22 @@
+type: markdown
+content: |-
+  ## <center> Pakete in Zustellung
+  ***
+
+    {% set lang = states('input_select.language') %}
+    {% set translations = {'en': 'en', 'de': 'de', 'es': 'es', 'fr': 'fr'} %}
+    {% set target_lang = translations.get(lang, 'en') %}
+
+    {% set my_word = "meinWort1" %}
+    {% set my_translation = state_attr('sensor.my_dictionary', my_word) or my_word %}
+
+    {% if states.sensor.seventeentrack_packages_in_transit.attributes.packages %}
+      {% for package in states.sensor.seventeentrack_packages_in_transit.attributes.packages %}
+        {% set info_text = states('sensor.seventeentrack_packages_in_transit')|from_json|default("")|from_json|selectattr('tracking_number', 'equalto', package.tracking_number)|map(attribute='info_text')|list|first|default('Status unbekannt') %}
+        **{{ package.friendly_name }} ({{ package.tracking_number }}):** {{ info_text }} - {{ package.timestamp }} ({{ package.timestamp | timestamp_custom("%d:%m:%Y %H:%M") }}){% if lang != 'en' %} - {{ target_lang }}: {{ info_text | gct(target_lang) }}{% endif %}{% if lang == 'de' %}
+        - Mein Wort: {{ my_word }} - Meine Übersetzung: {{ my_translation }}
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      Keine Pakete.
+    {% endif %}

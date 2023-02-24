@@ -14,14 +14,17 @@
 
 ### Paket in Zustellung
 #### Passe oder Ergänze weitere Ereignisse zu deiner Paketverfolgung
-[In Zustellung_v1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/in_zustellung_v1) 
+### [In Zustellung_v1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/in_zustellung_v1) 
 ```
 replace("Englisch", "Deutsch.")| 
 ```
-[In Zustellung_v2](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/in_zustellung_v2) 
+### [In Zustellung_v2](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/in_zustellung_v2) 
 ```
 {% elif info_text == "Englisch"%}Deutsch. 
 ```
-### Test mit Google Translate
-#### Automatische erkennen und Übersetzen. 
-### [In Zustellung Google](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/in_zustellun_google) 
+
+### Test DeelP, Google Translate API
+#### Automatische Erkennung und Übersetzung. 
+#### [In Zustellung Google](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/test_auto_translate/in_zustellun_google) 
+#### [In Zustellung DeelP](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/test_auto_translate/in_zustellun_deelp) 
+#### [Packages](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/test_auto_translate/translation_api.yaml) 

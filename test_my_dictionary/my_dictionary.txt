@@ -1,0 +1,5 @@
+meinWort1, myTranslation1
+meinWort2, myTranslation2
+
+meinWort1: myTranslation1
+meinWort2: myTranslation2

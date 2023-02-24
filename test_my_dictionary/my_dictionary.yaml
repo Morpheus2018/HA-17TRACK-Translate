@@ -1,0 +1,33 @@
+my_dictionary:
+
+    homeassistant:
+
+    input_select:
+      language:
+        name: Language
+        options:
+          - en
+          - de
+          - es
+          - fr
+        initial: de
+        icon: mdi:earth
+
+    sensor:
+      - platform: file
+        name: my_dictionary
+        file_path: /config/www/my_dictionary/my_dictionary.txt
+        value_template: '{{ value_json }}'
+
+      - platform: file
+        name: my_dictionary1
+        file_path: /config/www/my_dictionary/my_dictionary.txt
+        value_template: >
+          {% set my_dict = {} %}
+          {% for line in value.split('\n') %}
+            {% if line %}
+              {% set parts = line.split(': ') %}
+              {% set my_dict[parts[0]] = parts[1] %}
+            {% endif %}
+          {% endfor %}
+          {{ my_dict }}
