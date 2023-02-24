@@ -1,5 +1,32 @@
 meinWort1, myTranslation1
 meinWort2, myTranslation2
-
 meinWort1: myTranslation1
 meinWort2: myTranslation2
+shipment: Sendung
+loaded: geladen
+delivery: Zustellung
+vehicle: Fahrzeug
+processed: bearbeitet
+parcel center: Paketzentrum
+origin: Ursprung
+arrived: angekommen
+region: Region
+recipient: Empfänger
+transported: transportiert
+base: Basis
+next step: nächster Schritt
+pick-up: Abholung
+successful: erfolgreich
+posted: aufgegeben
+sender: Absender
+retail outlet: Einzelhandelsgeschäft
+instruction data: Anweisungsdaten
+DHL: DHL
+electronically: elektronisch
+departed: abgereist
+facility: Einrichtung
+parcel data: Paketdaten
+entered: eingegeben
+GLS: GLS
+IT system: IT-System
+handed over: übergeben
