@@ -25,6 +25,6 @@ replace("Englisch", "Deutsch.")|
 
 ### Test DeelP, Google Translate API
 #### Automatische Erkennung und Übersetzung. 
-#### [In Zustellung Google](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/test_auto_translate/in_zustellun_google) 
-#### [In Zustellung DeelP](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/test_auto_translate/in_zustellun_deelp) 
-#### [Packages](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/test_auto_translate/translation_api.yaml) 
+#### [In Zustellung Google](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/test_auto_translate/test_auto_translate/in_zustellun_google) 
+#### [In Zustellung DeelP](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/test_auto_translate/test_auto_translate/in_zustellung_deelp) 
+#### [Packages](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/test_auto_translate/test_auto_translate/translation_api.yaml) 
