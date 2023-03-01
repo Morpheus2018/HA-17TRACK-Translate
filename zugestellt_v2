@@ -1,10 +1,16 @@
 type: markdown
-content: |
+content: >
   ## <center> Zugestellt
+
   ***
   {% for package in states.sensor.seventeentrack_packages_delivered.attributes.packages %}
-  **{{ package.friendly_name }} ({{ package.tracking_number }}):** {% set info_text = state_attr('sensor.seventeentrack_packages_delivered', 'packages')[0]['info_text'] %}
-  {% if info_text == "The shipment has been successfully delivered" %}Die Lieferung wurde erfolgreich zugestellt am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
-  {% else %}Keine Packete.{% endif %}
+  
+  **{{ package.friendly_name }} ({{ package.tracking_number }}):** {% set info_text = state_attr('sensor.seventeentrack_packages_delivered','packages')[0]['info_text'] %}
+  {% if info_text == "The shipment has been successfully delivered" %}Die Lieferung wurde erfolgreich zugestellt
+  {% elif info_text == "Englisch"%}Überzetzung
+  {% elif info_text == "Englisch"%}Überzetzung
+  {% elif info_text == "Englisch"%}Überzetzung{% else %}Keine Packete.{% endif %} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
+  
   ***
+
   {% endfor %}
