@@ -1,0 +1,50 @@
+type: markdown
+content: |-
+  ## <center> Zugestellt
+  ***
+
+    {% set lang = states('input_select.language') %}
+    {% set translations = {'en': 'en', 'de': 'de', 'es': 'es', 'fr': 'fr'} %}
+    {% set target_lang = translations.get(lang, 'en') %}
+
+    {% if states.sensor.seventeentrack_packages_delivered.attributes.packages %}
+      {% for package in states.sensor.seventeentrack_packages_delivered.attributes.packages %}
+        {% set info_text = state_attr('sensor.seventeentrack_packages_delivered', 'packages')[0]['info_text'] %}
+        {{ package.friendly_name }} ({{ package.tracking_number }}): {{ info_text }}
+        {% if lang != 'en' %}
+          {% set deepl_url = 'https://api-free.deepl.com/v2/translate' %}
+          {% set deepl_params = {'auth_key': 'YOUR_DEEPL_AUTH_KEY', 'text': info_text, 'target_lang': target_lang} %}
+          {% set deepl_response = rest.get(deepl_url, headers={'Content-Type': 'application/x-www-form-urlencoded'}, params=deepl_params).json() %}
+          {% if deepl_response %}
+            - {{ target_lang }}: {{ deepl_response.translations[0].text }}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      Keine Pakete.
+    {% endif %}
+
+
+    {% set lang = states('input_select.language') %}
+    {% set translations = {'en': 'en', 'de': 'de', 'es': 'es', 'fr': 'fr'} %}
+    {% set target_lang = translations.get(lang, 'en') %}
+
+    {% if states.sensor.seventeentrack_packages_delivered.attributes.packages %}
+      {% for package in states.sensor.seventeentrack_packages_delivered.attributes.packages %}
+        {% set info_text = state_attr('sensor.seventeentrack_packages_delivered', 'packages')[0]['info_text'] %}
+        {{ package.friendly_name }} ({{ package.tracking_number }}): {{ info_text }}
+        {% if lang != 'en' %}
+          {% set deepl_url = 'https://api-free.deepl.com/v2/translate' %}
+          {% set deepl_params = {'auth_key': 'YOUR_DEEPL_AUTH_KEY'} %}
+          {% set deepl_payload = {'text': info_text, 'target_lang': target_lang} %}
+          {% set deepl_response = rest.post(deepl_url, headers={'Content-Type': 'application/x-www-form-urlencoded'}, params=deepl_params, data=deepl_payload).json() %}
+          {% if deepl_response and 'translations' in deepl_response %}
+            - {{ target_lang }}: {{ deepl_response.translations[0].text }}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      Keine Pakete.
+    {% endif %}
+
+
