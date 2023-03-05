@@ -20,9 +20,9 @@
 {% elif info_text == "Englisch"%}Deutsch. 
 ```
 
-### Test DeepL, Google Translate API
+### Test DeepL API, Translation
 #### Automatische Erkennung und Übersetzung. 
-#### [In Zustellung Google](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/test_auto_translate/test_auto_translate/in_zustellun_google) 
-#### [In Zustellung DeepL](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/test_auto_translate/test_auto_translate/in_zustellung_deelp) 
-#### [Packages](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/test_auto_translate/test_auto_translate/translation_api.yaml) 
+#### [Zugestellt DeepL](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp.api_translation/zugestellt_deepl) 
+#### [In Zustellung DeepL](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp.api_translation/in_zustellung_deepl) 
+#### [Packages](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp.api_translation/deepl_translation.yaml) 
 
