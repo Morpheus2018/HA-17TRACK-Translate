@@ -26,3 +26,9 @@
 #### [In Zustellung DeepL](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp.api_translation/in_zustellung_deepl) 
 #### [Packages](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp.api_translation/deepl_translation.yaml) 
 
+### Voraussetzung [DeepL-Konto](https://www.deepl.com/) 
+#### Erstellen Sie ein neues [DeepL API Free Konto](https://www.deepl.com/de/pro-api?cta=checkout-pro) 
+#### Ersetze die Authentifizierungsschlüssel für die DeepL-API in [Packages](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp.api_translation/deepl_translation.yaml) 
+```
+Authorization: !secret deepl_apikey #Authentifizierungsschlüssel für die DeepL-API 
+```

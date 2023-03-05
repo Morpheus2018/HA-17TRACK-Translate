@@ -21,7 +21,7 @@ deepl_translation:
         method: POST
         headers:
           Content-Type: application/x-www-form-urlencoded
-          Authorization: !secret deepl_apikey
+          Authorization: !secret deepl_apikey #Authentifizierungsschlüssel für die DeepL-API
         payload: ""
         value_template: "{{ value_json.translations[0].text }}"
         json_attributes:
@@ -36,7 +36,7 @@ deepl_translation:
         method: POST
         headers:
           Content-Type: application/x-www-form-urlencoded
-          Authorization: !secret deepl_apikey
+          Authorization: !secret deepl_apikey #Authentifizierungsschlüssel für die DeepL-API
         payload: ""
         value_template: "{{ value_json.translations[0].text }}"
         json_attributes:
@@ -52,7 +52,7 @@ deepl_translation:
     #     method: POST
     #     headers:
     #       Content-Type: application/x-www-form-urlencoded
-    #       Authorization: !secret deepl_apikey
+    #       Authorization: !secret deepl_apikey #Authentifizierungsschlüssel für die DeepL-API
     #     payload: "text=The shipment has been successfully delivered&target_lang=DE"
     #     value_template: "{{ value_json.translations[0].text }}" 
     #     json_attributes:
