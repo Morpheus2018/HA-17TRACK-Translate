@@ -32,3 +32,4 @@
 ```
 Authorization: !secret deepl_apikey #Authentifizierungsschlüssel für die DeepL-API 
 ```
+![Kombi DeepL](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/combi_deepl.png)
