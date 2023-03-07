@@ -35,7 +35,6 @@ Authorization: !secret deepl_apikey #Authentifizierungsschlüssel für der DeepL
 
 ### [DeelP API](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp.api_translation/combi_deepl)
 ![Kombi DeepL](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/combi_deepl.png)
-![Kombi Color](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/combi_color.png)
 
 ### Custom
 ```
@@ -51,4 +50,5 @@ am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%Y %H:%M') }} Uh
 {% else %}
 ## <center> <font color="#44739e">Keine Pakete</font></center>
 {% endif %}
- ```
+```
+![Kombi Color](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/custem_url_color.png)
