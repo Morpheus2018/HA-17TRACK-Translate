@@ -14,6 +14,7 @@ content: |
   {% elif info_text == "The instruction data for this shipment have been provided by the sender to DHL electronically"%}Die Auftragsdaten für diese Sendung wurden vom Absender elektronisch an DHL übermittelt.
   {% elif info_text == "Departed from facility"%}Einrichtung verlassen.
   {% elif info_text == "The parcel data was entered into GLS IT system; the parcel was not yet handed over to GLS"%}Die Paketdaten wurden in das IT-System von GLS eingegeben; das Paket wurde noch nicht an GLS übergeben.
+  {% elif info_text == "Englisch"%}Überzetzung
   {% else %}Keine Packete{% endif %}
   ***
    {% endfor %}
