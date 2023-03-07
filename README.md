@@ -15,7 +15,7 @@
 ### Paket in Zustellung
 #### Passe oder Ergänze weitere Ereignisse zu deiner Paketverfolgung
 
-### [In Zustellung_v2](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/in_zustellung_v2) | [Zugestellt](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/zugestellt_v2)
+### [In Zustellung_v2](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/in_zustellung_v2#L17) | [Zugestellt](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/zugestellt_v2#L10)
 ```
 {% elif info_text == "Englisch"%}Deutsch. 
 ```
