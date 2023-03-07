@@ -35,3 +35,12 @@ Authorization: !secret deepl_apikey #Authentifizierungsschlüssel für der DeepL
 
 ### [DeelP API](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp.api_translation/combi_deepl)
 ![Kombi DeepL](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/combi_deepl.png)
+
+### Custom
+```
+# Tracking-Link dhl.de öffnet Ihre Sendungsnummer.
+({{ package.tracking_number }}](https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?piececode={{ package.tracking_number }}))
+
+# Zeit Format 09.02.2023 10:20
+am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%Y %H:%M') }} Uhr.
+ ```
