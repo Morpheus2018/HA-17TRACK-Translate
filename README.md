@@ -43,4 +43,11 @@ Authorization: !secret deepl_apikey #Authentifizierungsschlüssel für der DeepL
 
 # Zeit Format 09.02.2023 10:20
 am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%Y %H:%M') }} Uhr.
+
+# Farbwechsel bei Status In Zustellung
+{% if states('sensor.seventeentrack_packages_in_transit') == '1' %}
+## <center>  <font color="#fdd835">In Zustellung</font></center>
+{% else %}
+## <center> <font color="#44739e">Keine Pakete</font></center>
+{% endif %}
  ```
