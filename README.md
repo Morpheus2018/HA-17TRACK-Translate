@@ -38,7 +38,7 @@ Authorization: !secret deepl_apikey #Authentifizierungsschlüssel für der DeepL
 
 ### Custom
 ```
-# Tracking-Link dhl.de öffnet Ihre Sendungsnummer.
+# Tracking-Link dhl.de öffnet Ihre DHL Sendungsnummer.
 ({{ package.tracking_number }}](https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?piececode={{ package.tracking_number }}))
 
 # Zeit Format 09.02.2023 10:20
