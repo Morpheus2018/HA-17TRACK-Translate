@@ -48,7 +48,7 @@ am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%Y %H:%M') }} Uh
 {% if states('sensor.seventeentrack_packages_in_transit') == '1' %}
 ## <center>  <font color="#fdd835">In Zustellung</font></center>
 {% else %}
-## <center> <font color="#44739e">Keine Pakete</font></center>
+## <center> <font color="#44739e">Keine Pakete in Zustellung</font></center>
 {% endif %}
 ```
 ![Coustom URL Color](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/custom_url_color.png)
