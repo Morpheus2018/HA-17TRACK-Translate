@@ -11,17 +11,14 @@
 {% elif info_text == "Englisch"%}Überzetzung. 
 ```
 
-### DeepL API Translation
+### [DeepL](https://www.deepl.com/) API Translation
+#### Voraussetzung, erstellen Sie ein [DeepL API Free Konto](https://www.deepl.com/de/pro-api?cta=checkout-pro)
 #### Automatische Erkennung und Übersetzung. 
 #### [Zugestellt DeepL](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp.api_translation/zugestellt_deepl) | [In Zustellung DeepL](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp.api_translation/in_zustellung_deepl) | [Packages](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp.api_translation/deepl_translation.yaml) 
-
-### Voraussetzung [DeepL-Konto](https://www.deepl.com/) 
-#### Erstellen Sie ein neues [DeepL API Free Konto](https://www.deepl.com/de/pro-api?cta=checkout-pro) 
 #### Ersetze die Authentifizierungsschlüssel für die DeepL-API in [Packages](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp.api_translation/deepl_translation.yaml#L24) 
 ```
 Authorization: !secret deepl_apikey #Authentifizierungsschlüssel für die DeepL-API 
 ```
-
 ### [DeelP API](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp.api_translation/combi_deepl)
 ![Kombi DeepL](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/combi_deepl.png)
 
