@@ -21,7 +21,7 @@ content: >-
 
   {% if states('sensor.seventeentrack_packages_delivered') == '1' %} ##
   <center>  <font color="green">Zugestellt</font></center> {% else %} ##
-  <center> <font color="#44739e">Keine Pakete</font></center>
+  <center> <font color="#44739e">Zugestellt</font></center>
   {% endif %}
 
   ***
