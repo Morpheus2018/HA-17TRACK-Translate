@@ -8,7 +8,7 @@
 ### Passe oder Ergänze weitere Ereignisse zu deiner Paketverfolgung
 #### [Zugestellt_v1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/zugestellt_v1#L7) | [Zugestellt_v2](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/zugestellt_v2#L10) | [In Zustellung_v2](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/in_zustellung_v2#L17)
 ```
-{% elif info_text == "Englisch"%}Deutsch. 
+{% elif info_text == "Englisch"%}Überzetzung. 
 ```
 
 ### DeepL API Translation
