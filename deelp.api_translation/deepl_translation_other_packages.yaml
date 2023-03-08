@@ -2,6 +2,17 @@ deepl_translation_other_packages:
 
     homeassistant:
 
+    input_select:
+      language:
+        name: Sprache
+        options:
+          - EN
+          - DE
+          - ES
+          - FR
+        initial: DE
+        icon: mdi:earth
+
     sensor:
 # NICHT GETESTET
       - platform: rest

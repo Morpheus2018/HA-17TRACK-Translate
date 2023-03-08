@@ -1,6 +1,17 @@
 deepl_translation:
 
     homeassistant:
+
+    input_select:
+      language:
+        name: Sprache
+        options:
+          - EN
+          - DE
+          - ES
+          - FR
+        initial: DE
+        icon: mdi:earth
         
     sensor:
       - platform: rest

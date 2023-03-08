@@ -36,5 +36,28 @@ am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%Y %H:%M') }} Uh
 {% else %}
 ## <center> <font color="#44739e">Keine Pakete in Zustellung</font></center>
 {% endif %}
+
+# Ziel Sprache Auswahl
+target_lang={{ states.input_select.language.state }}
+
+input_select:
+      language:
+        name: Sprache
+        options:
+          - EN
+          - DE
+          - ES
+          - FR
+        initial: DE
+        icon: mdi:earth
 ```
 ![Coustom URL Color](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/custom_url_color.png)
+
+### [Weiterer Paketstatus](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp.api_translation/deepl_translation_other)
+* Not found   - Funktioniert (Attribute status)
+* Expired     - Nicht Getestet
+* Pick up     - Nicht Getestet
+* Undelivered - Nicht Getestet
+* Alert       - Nicht Getestet
+
+![Weiterer Paketstatus](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/other.png)
