@@ -3,10 +3,11 @@ deepl_translation_other_packages:
     homeassistant:
 
     sensor:
+# NICHT GETESTET
       - platform: rest
         name: deepl_translation_expired
         resource_template: >-
-          https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_expired.attributes.packages[0].info_text | urlencode }}&target_lang=DE
+          https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_expired.attributes.packages[0].status | urlencode }}&target_lang=DE
         method: POST
         headers:
           Content-Type: application/x-www-form-urlencoded
@@ -17,11 +18,11 @@ deepl_translation_other_packages:
           - translations
         scan_interval: 300
         verify_ssl: true
-
+# FUNKTIONIERT ATTRIBUTE STATUS
       - platform: rest
         name: deepl_translation_not_found
         resource_template: >-
-          https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_not_found.attributes.packages[0].info_text | urlencode }}&target_lang=DE
+          https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_not_found.attributes.packages[0].status | urlencode }}&target_lang=DE
         method: POST
         headers:
           Content-Type: application/x-www-form-urlencoded
@@ -32,11 +33,11 @@ deepl_translation_other_packages:
           - translations
         scan_interval: 300
         verify_ssl: true
-
+# NICHT GETESTET
       - platform: rest
         name: deepl_translation_ready_to_be_picked_up
         resource_template: >-
-          https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_ready_to_be_picked_up.attributes.packages[0].info_text | urlencode }}&target_lang=DE
+          https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_ready_to_be_picked_up.attributes.packages[0].status | urlencode }}&target_lang=DE
         method: POST
         headers:
           Content-Type: application/x-www-form-urlencoded
@@ -47,11 +48,11 @@ deepl_translation_other_packages:
           - translations
         scan_interval: 300
         verify_ssl: true
-
+# NICHT GETESTET
       - platform: rest
         name: deepl_translation_returned
         resource_template: >-
-          https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_returned.attributes.packages[0].info_text | urlencode }}&target_lang=DE
+          https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_returned.attributes.packages[0].status | urlencode }}&target_lang=DE
         method: POST
         headers:
           Content-Type: application/x-www-form-urlencoded
@@ -66,7 +67,7 @@ deepl_translation_other_packages:
       - platform: rest
         name: deepl_translation_undelivered
         resource_template: >-
-          https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_undelivered.attributes.packages[0].info_text | urlencode }}&target_lang=DE
+          https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_undelivered.attributes.packages[0].status | urlencode }}&target_lang=DE
         method: POST
         headers:
           Content-Type: application/x-www-form-urlencoded
