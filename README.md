@@ -4,13 +4,11 @@
 
 ## Preview
 
-### [Zugestellt_v1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/zugestellt_v1) | [Zugestellt_v2](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/zugestellt_v2)
-![zugestellt_v1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/zugestellt_v1.png)
-![zugestellt](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/zugestellt.png)
+![zugestellt](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/preview.gif)
 
+
+### [Zugestellt_v1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/zugestellt_v1) | [Zugestellt_v2](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/zugestellt_v2)
 ### [In Zustellung_v2](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/in_zustellung_v2) 
-![in_zustellung_v1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/in_zustellung_v2.png)
-![in_zustellung_v2](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/in_zustellung_v1.png)
 
 ### Paket in Zustellung
 #### Passe oder Ergänze weitere Ereignisse zu deiner Paketverfolgung
