@@ -56,7 +56,7 @@ input_select:
 ### [Weiterer Paketstatus](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp.api_translation/deepl_translation_other)
 * Not found   - Funktioniert (Attribute status)
 * Expired     - Nicht Getestet (Attribute status)
-* Pick up     - Nicht Getestet (Attribute status)
+* Pick up     - Funktioniert (Attribute status)
 * Undelivered - Nicht Getestet (Attribute status)
 * Alert       - Nicht Getestet (Attribute status)
 

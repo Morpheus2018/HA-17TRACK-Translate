@@ -44,7 +44,7 @@ deepl_translation_other_packages:
           - translations
         scan_interval: 300
         verify_ssl: true
-# NICHT GETESTET
+# FUNKTIONIERT ATTRIBUTE STATUS
       - platform: rest
         name: deepl_translation_ready_to_be_picked_up
         resource_template: >-

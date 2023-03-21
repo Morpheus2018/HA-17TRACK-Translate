@@ -1,0 +1,209 @@
+deepl_in_zustellung:
+
+    homeassistant:
+
+    input_select:
+      language:
+        name: Sprache
+        options:
+          - EN
+          - DE
+          - ES
+          - FR
+        initial: DE
+        icon: mdi:earth
+
+
+    sensor:
+
+      - platform: rest
+        name: deepl_translation_in_transit
+        resource_template: >-
+         https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_in_transit.attributes.packages[0].info_text | urlencode }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+        payload: ""
+        value_template: "{{ value_json.translations[0].text }}"
+        json_attributes:
+          - translations
+        scan_interval: 300
+        verify_ssl: true
+        force_update: true
+
+      - platform: rest
+        name: deepl_translation_in_transit0
+        resource_template: >-
+         https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_in_transit.attributes.packages[0].info_text | urlencode }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+        payload: ""
+        value_template: "{{ value_json.translations[0].text }}"
+        json_attributes:
+          - translations
+        scan_interval: 300
+        verify_ssl: true
+        force_update: true
+
+      - platform: rest
+        name: deepl_translation_in_transit1
+        resource_template: >-
+         https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_in_transit.attributes.packages[1].info_text | urlencode }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+        payload: ""
+        value_template: "{{ value_json.translations[0].text }}"
+        json_attributes:
+          - translations
+        scan_interval: 300
+        verify_ssl: true
+        force_update: true
+
+      - platform: rest
+        name: deepl_translation_in_transit2
+        resource_template: >-
+         https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_in_transit.attributes.packages[2].info_text | urlencode }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+        payload: ""
+        value_template: "{{ value_json.translations[0].text }}"
+        json_attributes:
+          - translations
+        scan_interval: 300
+        verify_ssl: true
+        force_update: true
+
+      - platform: rest
+        name: deepl_translation_in_transit3
+        resource_template: >-
+         https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_in_transit.attributes.packages[3].info_text | urlencode }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+        payload: ""
+        value_template: "{{ value_json.translations[0].text }}"
+        json_attributes:
+          - translations
+        scan_interval: 300
+        verify_ssl: true
+        force_update: true
+
+      - platform: rest
+        name: deepl_translation_in_transit4
+        resource_template: >-
+         https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_in_transit.attributes.packages[4].info_text | urlencode }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+        payload: ""
+        value_template: "{{ value_json.translations[0].text }}"
+        json_attributes:
+          - translations
+        scan_interval: 300
+        verify_ssl: true
+        force_update: true
+
+      - platform: rest
+        name: deepl_translation_in_transit5
+        resource_template: >-
+         https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_in_transit.attributes.packages[5].info_text | urlencode }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+        payload: ""
+        value_template: "{{ value_json.translations[0].text }}"
+        json_attributes:
+          - translations
+        scan_interval: 300
+        verify_ssl: true
+        force_update: true
+
+      - platform: rest
+        name: deepl_translation_in_transit6
+        resource_template: >-
+         https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_in_transit.attributes.packages[6].info_text | urlencode }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+        payload: ""
+        value_template: "{{ value_json.translations[0].text }}"
+        json_attributes:
+          - translations
+        scan_interval: 300
+        verify_ssl: true
+        force_update: true
+
+      - platform: rest
+        name: deepl_translation_in_transit7
+        resource_template: >-
+         https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_in_transit.attributes.packages[7].info_text | urlencode }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+        payload: ""
+        value_template: "{{ value_json.translations[0].text }}"
+        json_attributes:
+          - translations
+        scan_interval: 300
+        verify_ssl: true
+        force_update: true
+
+      - platform: rest
+        name: deepl_translation_in_transit8
+        resource_template: >-
+         https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_in_transit.attributes.packages[8].info_text | urlencode }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+        payload: ""
+        value_template: "{{ value_json.translations[0].text }}"
+        json_attributes:
+          - translations
+        scan_interval: 300
+        verify_ssl: true
+        force_update: true
+
+      - platform: rest
+        name: deepl_translation_in_transit9
+        resource_template: >-
+         https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_in_transit.attributes.packages[9].info_text | urlencode }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+        payload: ""
+        value_template: "{{ value_json.translations[0].text }}"
+        json_attributes:
+          - translations
+        scan_interval: 300
+        verify_ssl: true
+        force_update: true
+
+      - platform: rest
+        name: deepl_translation_in_transit10
+        resource_template: >-
+         https://api-free.deepl.com/v2/translate?text={{ states.sensor.seventeentrack_packages_in_transit.attributes.packages[10].info_text | urlencode }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+        payload: ""
+        value_template: "{{ value_json.translations[0].text }}"
+        json_attributes:
+          - translations
+        scan_interval: 300
+        verify_ssl: true
+        force_update: true

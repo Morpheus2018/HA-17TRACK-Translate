@@ -4,7 +4,7 @@ content: |-
   ***
 
     {% for package in states.sensor.seventeentrack_packages_delivered.attributes.packages %}
-    **{{ package.friendly_name }} ({{ package.tracking_number }}):** {{ state_attr('sensor.deepl_translation_delivered', 'translations')[0]['text'] }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%Y %H:%M') }} Uhr.
+    **{{ package.friendly_name }} ({{ package.tracking_number }}):** {{ state_attr('sensor.deepl_delivered' ~ loop.index0, 'translations')[0]['text'] }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%Y %H:%M') }} Uhr.
     ***
     {% else %}
     Keine Pakete.
