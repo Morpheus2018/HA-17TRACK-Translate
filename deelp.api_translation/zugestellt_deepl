@@ -3,9 +3,11 @@ content: |-
   ## <center> Zugestellt DeelP
   ***
 
-    {% for package in states.sensor.seventeentrack_packages_delivered.attributes.packages %}
-    **{{ package.friendly_name }} ({{ package.tracking_number }}):** {{ state_attr('sensor.deepl_delivered' ~ loop.index0, 'translations')[0]['text'] }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%Y %H:%M') }} Uhr.
-    ***
-    {% else %}
-    Keine Pakete.
-    {% endfor %}
+  {% if states('sensor.seventeentrack_packages_delivered') == '0' %} Keine Pakete.
+  {% elif states.sensor.deepl_delivered is none %} Keine Übersetzung.
+  {% else %} {% for package in states.sensor.seventeentrack_packages_delivered.attributes.packages %}
+  **{{ package.friendly_name }} ({{ package.tracking_number }}):**
+  {{ state_attr('sensor.deepl_delivered' ~ loop.index0, 'translations')[0]['text'] }} {{ package.location }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%Y %H:%M') }} Uhr.
+  ***
+  {% endfor %}
+  {% endif %}
