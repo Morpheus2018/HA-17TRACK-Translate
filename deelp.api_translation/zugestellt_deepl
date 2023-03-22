@@ -1,6 +1,6 @@
 type: markdown
 content: |-
-  ## <center> Zugestellt DeelP
+  ## <center> Zugestellt
   ***
 
   {% if states('sensor.seventeentrack_packages_delivered') == '0' %} Keine Pakete.
