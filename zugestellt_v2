@@ -9,12 +9,12 @@ content: >
    **{{ package.friendly_name }} ({{ package.tracking_number }}):**
    {% set info_text = package.info_text %}
 
-   {% if info_text == "The shipment has been successfully delivered" %} Die Lieferung wurde erfolgreich zugestellt
+   {% if info_text == "The shipment has been successfully delivered" %}Die Lieferung wurde erfolgreich zugestellt
+   {% elif info_text == "Delivered."%}Geliefert!
    {% elif info_text == "Englisch"%}Überzetzung
    {% elif info_text == "Englisch"%}Überzetzung
    {% elif info_text == "Englisch"%}Überzetzung
-   {% endif %}
-   am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
+   {% else %}{{ package.info_text }}{% endif %} {{ package.location }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
 
     ***
 

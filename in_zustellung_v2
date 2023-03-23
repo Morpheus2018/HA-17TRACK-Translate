@@ -20,9 +20,10 @@ content: >
   {% elif info_text == "The parcel data was entered into GLS IT system; the parcel was not yet handed over to GLS"%}Die Paketdaten wurden in das IT-System von GLS eingegeben; das Paket wurde noch nicht an GLS übergeben.
   {% elif info_text == "Pre-Shipment Info Sent to Germany"%}Informationen vor dem Versand nach Deutschland gesendet
   {% elif info_text == "In transit."%}Unterwegs
+  {% elif info_text == "CHINA, SHANGHAI, Acceptance, Sent to Germany"%}CHINA, SHANGHAI, Abnahme, Versand nach Deutschland
   {% elif info_text == "Englisch"%}Überzetzung
-  {% endif %}
-  {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
+  {% else %}{{ package.info_text }}{% endif %}
+  {{ package.location }} {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
 
   ***
 
