@@ -1,0 +1,101 @@
+type: markdown
+content: >
+  ## <center> Paket Abgelaufen
+
+   ***
+
+   {% if states('sensor.seventeentrack_packages_expired') == '0' %}Keine Pakete.{% else %}
+   {% for package in states.sensor.seventeentrack_packages_expired.attributes.packages %}
+   **{{ package.friendly_name }} ({{ package.tracking_number }}):**
+   {% set status = package.status %}
+
+   {% if status == "The package has expired" %}Das Paket ist Abgelaufen
+   {% elif status == "Expired"%}Abgelaufen
+   {% elif status == "Englisch"%}Überzetzung
+   {% elif status == "Englisch"%}Überzetzung
+   {% elif status == "Englisch"%}Überzetzung
+   {% else %}{{ package.status }}{% endif %} {{ package.location }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
+
+    ***
+
+   {% endfor %} {% endif %}
+
+   ## <center> Paket nicht Zugestellt
+
+   ***
+
+   {% if states('sensor.seventeentrack_packages_undelivered') == '0' %}Keine Pakete.{% else %}
+   {% for package in states.sensor.seventeentrack_packages_undelivered.attributes.packages %}
+   **{{ package.friendly_name }} ({{ package.tracking_number }}):**
+   {% set status = package.status %}
+
+   {% if status == "undelivered" %}Nicht Geliefert
+   {% elif status == "The package was not delivered"%}Das Paket wurde nicht geliefert
+   {% elif status == "Englisch"%}Überzetzung
+   {% elif status == "Englisch"%}Überzetzung
+   {% elif status == "Englisch"%}Überzetzung
+   {% else %}{{ package.status }}{% endif %} {{ package.location }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
+
+    ***
+
+   {% endfor %} {% endif %}
+
+   ## <center> Paket nicht gefunden
+
+   ***
+
+   {% if states('sensor.seventeentrack_packages_not_found') == '0' %}Keine Pakete.{% else %}
+   {% for package in states.sensor.seventeentrack_packages_not_found.attributes.packages %}
+   **{{ package.friendly_name }} ({{ package.tracking_number }}):**
+   {% set status = package.status %}
+
+   {% if status == "Not Found" %}Nicht Gefunden
+   {% elif status == "The package was not found"%}Das Paket wurde nicht gefunden
+   {% elif status == "Englisch"%}Überzetzung
+   {% elif status == "Englisch"%}Überzetzung
+   {% elif status == "Englisch"%}Überzetzung
+   {% else %}{{ package.status }}{% endif %} {{ package.location }}
+
+    ***
+
+   {% endfor %} {% endif %}
+
+   ## <center> Pakete zur Abholung bereit
+
+   ***
+
+   {% if states('sensor.seventeentrack_packages_ready_to_be_picked_up') == '0' %}Keine Pakete.{% else %}
+   {% for package in states.sensor.seventeentrack_packages_ready_to_be_picked_up.attributes.packages %}
+   **{{ package.friendly_name }} ({{ package.tracking_number }}):**
+   {% set status = package.status %}
+
+   {% if status == "Ready to be Picked Up" %}Bereit zur Abholung
+   {% elif status == "Englisch"%}Überzetzung
+   {% elif status == "Englisch"%}Überzetzung
+   {% elif status == "Englisch"%}Überzetzung
+   {% elif status == "Englisch"%}Überzetzung
+   {% else %}{{ package.status }}{% endif %} {{ package.location }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
+
+    ***
+
+   {% endfor %} {% endif %}
+
+   ## <center>  Pakete zurückgesendet
+
+   ***
+
+   {% if states('sensor.seventeentrack_packages_returned') == '0' %}Keine Pakete.{% else %}
+   {% for package in states.sensor.seventeentrack_packages_returned.attributes.packages %}
+   **{{ package.friendly_name }} ({{ package.tracking_number }}):**
+   {% set status = package.status %}
+
+   {% if status == "Returned" %}Pakete zurückgesendet
+   {% elif status == "The package has been returned"%}Das Paket wurde retourniert
+   {% elif status == "Englisch"%}Überzetzung
+   {% elif status == "Englisch"%}Überzetzung
+   {% elif status == "Englisch"%}Überzetzung
+   {% else %}{{ package.status }}{% endif %} {{ package.location }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
+
+    ***
+
+   {% endfor %} {% endif %}

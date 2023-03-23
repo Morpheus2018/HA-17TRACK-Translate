@@ -45,7 +45,7 @@ content: >-
   {% elif states.sensor.deepl_translation_not_found is none %} Keine Übersetzung.
   {% else %}{% for package in states.sensor.seventeentrack_packages_not_found.attributes.packages %}
   **{{ package.friendly_name }} ([{{ package.tracking_number }}](https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?piececode={{package.tracking_number }})):**
-  {{ state_attr('sensor.deepl_translation_not_found' ~ loop.index0, 'translations')[0]['text'] }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%Y %H:%M') }} Uhr.
+  {{ state_attr('sensor.deepl_translation_not_found' ~ loop.index0, 'translations')[0]['text'] }}
 
   ***
 
