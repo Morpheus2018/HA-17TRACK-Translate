@@ -22,6 +22,7 @@ content: >
   {% elif info_text == "In transit."%}Unterwegs
   {% elif info_text == "CHINA, SHANGHAI, Acceptance, Sent to Germany"%}CHINA, SHANGHAI, Abnahme, Versand nach Deutschland
   {% elif info_text == "Englisch"%}Überzetzung
+  {% elif info_text == "HONG KONG, Departed HONG KONG Airport"%}HONGKONG, Abflug vom Flughafen HONGKONG
   {% else %}{{ package.info_text }}{% endif %}
   {{ package.location }} {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
 
