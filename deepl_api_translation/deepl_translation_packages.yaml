@@ -1,0 +1,387 @@
+deepl_translation:
+
+    homeassistant:
+      - platform: seventeentrack
+        username: !secret track_user
+        password: !secret track_pass
+#        show_archived: false
+        show_delivered: true
+
+    input_select:
+      language:
+        name: Sprache
+        options:
+          - EN
+          - DE
+          - ES
+          - FR
+        initial: DE
+        icon: mdi:earth
+
+    automation:
+    - alias: Update Deepl Translation Packages
+      trigger:
+        - platform: state
+          entity_id:
+            - sensor.seventeentrack_packages_delivered
+        - platform: state
+          entity_id:
+            - sensor.seventeentrack_packages_in_transit
+        - platform: state
+          entity_id:
+            - sensor.seventeentrack_packages_not_found
+        - platform: state
+          entity_id:
+            - sensor.seventeentrack_packages_expired
+        - platform: state
+          entity_id:
+            - sensor.seventeentrack_packages_ready_to_be_picked_up
+        - platform: state
+          entity_id:
+            - sensor.seventeentrack_packages_undelivered
+        - platform: state
+          entity_id:
+            - sensor.seventeentrack_packages_returned
+      action:
+        - choose:
+            - conditions:
+                - condition: template
+                  value_template: >-
+                    {{ trigger.entity_id == 'sensor.seventeentrack_packages_delivered' }}
+              sequence:
+                - service: homeassistant.update_entity
+                  entity_id: sensor.deepl_translation_delivered
+            - conditions:
+                - condition: template
+                  value_template: >-
+                    {{ trigger.entity_id == 'sensor.seventeentrack_packages_in_transit' }}
+              sequence:
+                - service: homeassistant.update_entity
+                  entity_id: sensor.deepl_translation_in_transit
+            - conditions:
+                - condition: template
+                  value_template: >-
+                    {{ trigger.entity_id == 'sensor.seventeentrack_packages_not_found' }}
+              sequence:
+                - service: homeassistant.update_entity
+                  entity_id: sensor.deepl_translation_not_found
+            - conditions:
+                - condition: template
+                  value_template: >-
+                    {{ trigger.entity_id == 'sensor.seventeentrack_packages_ready_to_be_picked_up' }}
+              sequence:
+                - service: homeassistant.update_entity
+                  entity_id: sensor.deepl_translation_ready_to_be_picked_up
+            - conditions:
+                - condition: template
+                  value_template: >-
+                    {{ trigger.entity_id == 'sensor.seventeentrack_packages_returned' }}
+              sequence:
+                - service: homeassistant.update_entity
+                  entity_id: sensor.deepl_translation_returned
+            - conditions:
+                - condition: template
+                  value_template: >-
+                    {{ trigger.entity_id == 'sensor.seventeentrack_packages_undelivered' }}
+              sequence:
+                - service: homeassistant.update_entity
+                  entity_id: sensor.deepl_translation_undelivered
+            - conditions:
+                - condition: template
+                  value_template: >-
+                    {{ trigger.entity_id == 'sensor.seventeentrack_packages_expired' }}
+              sequence:
+                - service: homeassistant.update_entity
+                  entity_id: sensor.deepl_translation_expired
+
+    switch:
+      - platform: template
+        switches:
+          update_deepl_all_translation:
+            friendly_name: "Update All Deepl Translation"
+            value_template: "{{ false }}"
+            turn_on:
+              - service: homeassistant.update_entity
+                data:
+                  entity_id:
+                    - sensor.deepl_translation_delivered
+                    - sensor.deepl_translation_in_transit
+                    - sensor.deepl_translation_not_found
+                    - sensor.deepl_translation_ready_to_be_picked_up
+                    - sensor.deepl_translation_returned
+                    - sensor.deepl_translation_undelivered
+                    - sensor.deepl_translation_expired
+              - service: switch.turn_on
+                entity_id: switch.update_deepl_translation
+            turn_off:
+              service: switch.turn_off
+              entity_id: switch.update_deepl_translation
+            icon_template: mdi:update
+
+    sensor:
+# DeepL Translation Delivered
+      - platform: rest
+        name: DeepL Translation Delivered
+        resource_template: >-
+          https://api-free.deepl.com/v2/translate?
+          &text={{ state_attr("sensor.all_delivered_packages", "delivered0") }}
+          &text={{ state_attr("sensor.all_delivered_packages", "delivered1") }}
+          &text={{ state_attr("sensor.all_delivered_packages", "delivered2") }}
+          &text={{ state_attr("sensor.all_delivered_packages", "delivered3") }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+#        payload: ""
+#        json_attributes_path: "$.translations[0].text"
+        json_attributes:
+          - translations
+        value_template: "{{ value_json.translations[0].text }}"
+        verify_ssl: true
+        force_update: false
+        scan_interval: 86400
+
+# DeepL Translation In Transit
+      - platform: rest
+        name: DeepL Translation In Transit
+        resource_template: >-
+          https://api-free.deepl.com/v2/translate?
+          &text={{ state_attr("sensor.all_in_transit_packages", "in_transit0") }}
+          &text={{ state_attr("sensor.all_in_transit_packages", "in_transit1") }}
+          &text={{ state_attr("sensor.all_in_transit_packages", "in_transit2") }}
+          &text={{ state_attr("sensor.all_in_transit_packages", "in_transit3") }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+#        payload: ""
+#        json_attributes_path: "$.translations[0].text"
+        json_attributes:
+          - translations
+        value_template: "{{ value_json.translations[0].text }}"
+        verify_ssl: true
+        force_update: false
+        scan_interval: 86400
+
+# DeepL Translation Expired
+      - platform: rest
+        name: DeepL Translation Expired
+        resource_template: >-
+          https://api-free.deepl.com/v2/translate?
+          &text={{ state_attr("sensor.all_expired_packages", "expired0") }}
+          &text={{ state_attr("sensor.all_expired_packages", "expired1") }}
+          &text={{ state_attr("sensor.all_expired_packages", "expired2") }}
+          &text={{ state_attr("sensor.all_expired_packages", "expired3") }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+#        payload: ""
+#        json_attributes_path: "$.translations[0].text"
+        json_attributes:
+          - translations
+        value_template: "{{ value_json.translations[0].text }}"
+        verify_ssl: true
+        force_update: false
+        scan_interval: 86400
+
+# DeepL Translation Not Found
+      - platform: rest
+        name: DeepL Translation Not Found
+        resource_template: >-
+          https://api-free.deepl.com/v2/translate?
+          &text={{ state_attr("sensor.all_not_found_packages", "not_found0") }}
+          &text={{ state_attr("sensor.all_not_found_packages", "not_found1") }}
+          &text={{ state_attr("sensor.all_not_found_packages", "not_found2") }}
+          &text={{ state_attr("sensor.all_not_found_packages", "not_found3") }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+#        payload: ""
+#        json_attributes_path: "$.translations[0].text"
+        json_attributes:
+          - translations
+        value_template: "{{ value_json.translations[0].text }}"
+        verify_ssl: true
+        force_update: false
+        scan_interval: 86400
+
+# DeepL Translation Ready to be Picked Up
+      - platform: rest
+        name: DeepL Translation Ready to be Picked Up
+        resource_template: >-
+          https://api-free.deepl.com/v2/translate?
+          &text={{ state_attr("sensor.all_ready_to_be_picked_up_packages", "picked_up0") }}
+          &text={{ state_attr("sensor.all_ready_to_be_picked_up_packages", "picked_up1") }}
+          &text={{ state_attr("sensor.all_ready_to_be_picked_up_packages", "picked_up2") }}
+          &text={{ state_attr("sensor.all_ready_to_be_picked_up_packages", "picked_up3") }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+#        payload: ""
+#        json_attributes_path: "$.translations[0].text"
+        json_attributes:
+          - translations
+        value_template: "{{ value_json.translations[0].text }}"
+        verify_ssl: true
+        force_update: false
+        scan_interval: 86400
+
+# DeepL Translation Returned
+      - platform: rest
+        name: DeepL Translation Returned
+        resource_template: >-
+          https://api-free.deepl.com/v2/translate?
+          &text={{ state_attr("sensor.all_returned_packages", "returned0") }}
+          &text={{ state_attr("sensor.all_returned_packages", "returned1") }}
+          &text={{ state_attr("sensor.all_returned_packages", "returned2") }}
+          &text={{ state_attr("sensor.all_returned_packages", "returned3") }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+#        payload: ""
+#        json_attributes_path: "$.translations[0].text"
+        json_attributes:
+          - translations
+        value_template: "{{ value_json.translations[0].text }}"
+        verify_ssl: true
+        force_update: false
+        scan_interval: 86400
+
+# DeepL Translation Undelivered
+      - platform: rest
+        name: DeepL Translation Undelivered
+        resource_template: >-
+          https://api-free.deepl.com/v2/translate?
+          &text={{ state_attr("sensor.all_undelivered_packages", "undelivered0") }}
+          &text={{ state_attr("sensor.all_undelivered_packages", "undelivered1") }}
+          &text={{ state_attr("sensor.all_undelivered_packages", "undelivered2") }}
+          &text={{ state_attr("sensor.all_undelivered_packages", "undelivered3") }}&target_lang={{ states.input_select.language.state }}
+        method: POST
+        headers:
+          Content-Type: application/x-www-form-urlencoded
+          Authorization: !secret deepl_apikey
+#        payload: ""
+#        json_attributes_path: "$.translations[0].text"
+        json_attributes:
+          - translations
+        value_template: "{{ value_json.translations[0].text }}"
+        verify_ssl: true
+        force_update: false
+        scan_interval: 86400
+
+    template:
+      - sensor:
+          - name: "All Delivered Packages"
+            state: >
+              {{ states("sensor.seventeentrack_packages_delivered")  }}
+            attributes:
+              delivered0: "{{ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[0]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[0]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[0]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[0]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[0]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              delivered1: "{{ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[1]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[1]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[1]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[1]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[1]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              delivered2: "{{ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[2]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[2]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[2]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[1]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[2]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              delivered3: "{{ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[3]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[3]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[3]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[3]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[3]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              delivered4: "{{ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[4]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[4]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[4]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[4]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[4]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              delivered5: "{{ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[5]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[5]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[5]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[5]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[5]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              delivered6: "{{ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[6]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[6]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[6]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[6]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[6]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              delivered7: "{{ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[7]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[7]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[7]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[7]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[7]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              delivered8: "{{ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[8]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[8]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[8]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[8]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[8]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              delivered9: "{{ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[9]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[9]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[9]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[9]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_delivered', 'packages')[9]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+
+      - sensor:
+          - name: "All In Transit Packages"
+            state: >
+              {{ states("sensor.seventeentrack_packages_in_transit")  }}
+            attributes:
+              in_transit0: "{{ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[0]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[0]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[0]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[0]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[0]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              in_transit1: "{{ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[1]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[1]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[1]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[1]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[1]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              in_transit2: "{{ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[2]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[2]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[2]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[1]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[2]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              in_transit3: "{{ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[3]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[3]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[3]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[3]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[3]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              in_transit4: "{{ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[4]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[4]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[4]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[4]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[4]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              in_transit5: "{{ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[5]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[5]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[5]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[5]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[5]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              in_transit6: "{{ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[6]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[6]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[6]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[6]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[6]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              in_transit7: "{{ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[7]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[7]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[7]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[7]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[7]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              in_transit8: "{{ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[8]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[8]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[8]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[8]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[8]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              in_transit9: "{{ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[9]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[9]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[9]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[9]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_in_transit', 'packages')[9]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+
+      - sensor:
+          - name: "All Not Found Packages"
+            state: >
+              {{ states("sensor.seventeentrack_packages_not_found")  }}
+            attributes:
+              not_found0: "{{ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[0]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[0]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[0]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[0]['status'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[0]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[0]['timestamp'] }}"
+              not_found1: "{{ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[1]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[1]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[1]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[1]['status'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[1]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[1]['timestamp'] }}"
+              not_found2: "{{ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[2]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[2]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[2]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[2]['status'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[1]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[2]['timestamp'] }}"
+              not_found3: "{{ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[3]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[3]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[3]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[3]['status'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[3]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[3]['timestamp'] }}"
+              not_found4: "{{ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[4]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[4]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[4]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[4]['status'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[4]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[4]['timestamp'] }}"
+              not_found5: "{{ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[5]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[5]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[5]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[5]['status'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[5]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[5]['timestamp'] }}"
+              not_found6: "{{ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[6]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[6]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[6]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[6]['status'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[6]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[6]['timestamp'] }}"
+              not_found7: "{{ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[7]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[7]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[7]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[7]['status'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[7]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[7]['timestamp'] }}"
+              not_found8: "{{ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[8]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[8]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[8]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[8]['status'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[8]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[8]['timestamp'] }}"
+              not_found9: "{{ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[9]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[9]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[9]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[9]['status'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[9]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_not_found', 'packages')[9]['timestamp'] }}"
+
+      - sensor:
+          - name: "All Ready to be Picked Up Packages"
+            state: >
+              {{ states("sensor.seventeentrack_packages_ready_to_be_picked_up")  }}
+            attributes:
+              picked_up0: "{{ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[0]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[0]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[0]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[0]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[0]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              picked_up1: "{{ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[1]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[1]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[1]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[1]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[1]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              picked_up2: "{{ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[2]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[2]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[2]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[1]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[2]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              picked_up3: "{{ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[3]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[3]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[3]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[3]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[3]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              picked_up4: "{{ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[4]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[4]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[4]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[4]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[4]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              picked_up5: "{{ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[5]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[5]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[5]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[5]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[5]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              picked_up6: "{{ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[6]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[6]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[6]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[6]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[6]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              picked_up7: "{{ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[7]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[7]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[7]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[7]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[7]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              picked_up8: "{{ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[8]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[8]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[8]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[8]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[8]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              picked_up9: "{{ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[9]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[9]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[9]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[9]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_ready_to_be_picked_up', 'packages')[9]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+
+      - sensor:
+          - name: "All Undelivered Packages"
+            state: >
+              {{ states("sensor.seventeentrack_packages_undelivered")  }}
+            attributes:
+              undelivered0: "{{ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[0]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[0]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[0]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[0]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[0]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              undelivered1: "{{ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[1]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[1]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[1]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[1]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[1]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              undelivered2: "{{ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[2]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[2]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[2]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[1]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[2]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              undelivered3: "{{ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[3]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[3]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[3]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[3]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[3]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              undelivered4: "{{ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[4]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[4]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[4]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[4]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[4]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              undelivered5: "{{ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[5]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[5]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[5]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[5]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[5]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              undelivered6: "{{ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[6]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[6]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[6]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[6]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[6]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              undelivered7: "{{ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[7]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[7]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[7]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[7]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[7]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              undelivered8: "{{ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[8]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[8]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[8]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[8]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[8]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              undelivered9: "{{ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[9]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[9]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[9]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[9]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_undelivered', 'packages')[9]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+
+      - sensor:
+          - name: "All Returned Packages"
+            state: >
+              {{ states("sensor.seventeentrack_packages_returned")  }}
+            attributes:
+              returned0: "{{ state_attr('sensor.seventeentrack_packages_returned', 'packages')[0]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[0]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[0]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[0]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[0]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              returned1: "{{ state_attr('sensor.seventeentrack_packages_returned', 'packages')[1]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[1]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[1]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[1]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[1]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              returned2: "{{ state_attr('sensor.seventeentrack_packages_returned', 'packages')[2]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[2]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[2]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[1]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[2]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              returned3: "{{ state_attr('sensor.seventeentrack_packages_returned', 'packages')[3]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[3]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[3]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[3]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[3]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              returned4: "{{ state_attr('sensor.seventeentrack_packages_returned', 'packages')[4]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[4]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[4]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[4]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[4]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              returned5: "{{ state_attr('sensor.seventeentrack_packages_returned', 'packages')[5]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[5]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[5]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[5]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[5]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              returned6: "{{ state_attr('sensor.seventeentrack_packages_returned', 'packages')[6]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[6]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[6]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[6]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[6]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              returned7: "{{ state_attr('sensor.seventeentrack_packages_returned', 'packages')[7]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[7]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[7]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[7]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[7]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              returned8: "{{ state_attr('sensor.seventeentrack_packages_returned', 'packages')[8]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[8]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[8]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[8]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[8]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              returned9: "{{ state_attr('sensor.seventeentrack_packages_returned', 'packages')[9]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[9]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[9]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[9]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_returned', 'packages')[9]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+
+      - sensor:
+          - name: "All Expired Packages"
+            state: >
+              {{ states("sensor.seventeentrack_packages_expired")  }}
+            attributes:
+              expired0: "{{ state_attr('sensor.seventeentrack_packages_expired', 'packages')[0]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[0]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[0]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[0]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[0]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              expired1: "{{ state_attr('sensor.seventeentrack_packages_expired', 'packages')[1]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[1]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[1]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[1]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[1]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              expired2: "{{ state_attr('sensor.seventeentrack_packages_expired', 'packages')[2]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[2]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[2]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[1]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[2]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              expired3: "{{ state_attr('sensor.seventeentrack_packages_expired', 'packages')[3]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[3]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[3]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[3]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[3]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              expired4: "{{ state_attr('sensor.seventeentrack_packages_expired', 'packages')[4]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[4]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[4]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[4]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[4]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              expired5: "{{ state_attr('sensor.seventeentrack_packages_expired', 'packages')[5]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[5]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[5]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[5]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[5]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              expired6: "{{ state_attr('sensor.seventeentrack_packages_expired', 'packages')[6]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[6]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[6]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[6]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[6]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              expired7: "{{ state_attr('sensor.seventeentrack_packages_expired', 'packages')[7]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[7]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[7]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[7]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[7]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              expired8: "{{ state_attr('sensor.seventeentrack_packages_expired', 'packages')[8]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[8]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[8]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[8]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[8]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
+              expired9: "{{ state_attr('sensor.seventeentrack_packages_expired', 'packages')[9]['friendly_name'] ~ ' (' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[9]['tracking_number'] ~ '): ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[9]['info_text'] ~ ' ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[9]['location'] ~ ' am ' ~ state_attr('sensor.seventeentrack_packages_expired', 'packages')[9]['timestamp'].strftime('%d.%m.%Y %H:%M')  }}"
