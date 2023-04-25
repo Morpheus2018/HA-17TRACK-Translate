@@ -20,10 +20,10 @@
 {% elif info_text == "Englisch"%}Überzetzung. 
 ```
 
-### [DeepL](https://www.deepl.com/) API Translation
+### [DeepL](https://www.deepl.com/)
 ##### Automatische Erkennung und Übersetzung. 
 #### Benötigt [DeepL API Free Konto](https://www.deepl.com/de/pro-api?cta=checkout-pro)
-### [DeepL API](https://github.com/Morpheus2018/HA-17TRACK-Translate/tree/main/deepl_api_translation)
+### [DeepL API Translation](https://github.com/Morpheus2018/HA-17TRACK-Translate/tree/main/deepl_api_translation)
 
 * ##### [Packages](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml) Inhalt: 
   - [Seventeentrack HA Configuration](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml#L4) 
