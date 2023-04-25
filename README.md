@@ -48,7 +48,7 @@
 
 ##### Ersetze die [Authentifizierungsschlüssel](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml#L134)  für die DeepL-API in secrets.yaml
 ```
-Authorization: !secret deepl_apikey #Authentifizierungsschlüssel für die DeepL-API
+Authorization: !secret deepl_apikey #Authentifizierungsschlüssel für die DeepL-API 
 ```
 ### Custom
 ```
