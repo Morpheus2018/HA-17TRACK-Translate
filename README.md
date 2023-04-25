@@ -14,8 +14,8 @@
 ### [DeepL](https://www.deepl.com/) API Translation
 ##### Automatische Erkennung und Übersetzung. 
 #### Benötigt [DeepL API Free Konto](https://www.deepl.com/de/pro-api?cta=checkout-pro)
-### [DeelP API](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp_api_translation/)
-##### [Markdown DeepL 1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/markdown_combi1.md) | [Markdown DeepL 2](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/markdown_combi2.md) | [Packages](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deelp_api_translation/deepl_translation_packages.yaml)  
+### [DeelP API](https://github.com/Morpheus2018/HA-17TRACK-Translate/tree/main/deepl_api_translation)
+##### [Markdown DeepL 1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi1.yaml) | [Markdown DeepL 2](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi2.yaml) | [Packages](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml)  
 ##### Ersetze die [Authentifizierungsschlüssel](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml#L134)  für die DeepL-API in secrets.yaml
 ```
 Authorization: !secret deepl_apikey #Authentifizierungsschlüssel für die DeepL-API 
