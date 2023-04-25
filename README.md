@@ -79,8 +79,4 @@ input_select:
         initial: DE
         icon: mdi:earth
 ```
-![Coustom URL Color](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/custom_url_color.png)
-
-![Weiterer Paketstatus](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/other.png)
-
-![Kombi DeepL](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/combi_deepl.png)
+![DeepL API Translation](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/deepl_api_translation.png)
