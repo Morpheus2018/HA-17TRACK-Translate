@@ -3,7 +3,7 @@
 [Home Assistant](https://www.home-assistant.io/) Tamplate Markdown Paket Status Übersetzung für [17TRACK Integration](https://www.home-assistant.io/integrations/seventeentrack)
 
 ## Screenshot
-![zugestellt](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/preview.gif)
+![zugestellt](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/preview_2.gif)
 
 * ##### [Markdown 1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/markdown_1.yaml) Inhalt:
   - [In Zustellung](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/markdown_1.yaml#L5)
