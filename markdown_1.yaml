@@ -80,4 +80,5 @@ cards:
 
         ***
 
-       {% endfor %} {% endif %}
+       {% endfor %} 
+       {% endif %}
