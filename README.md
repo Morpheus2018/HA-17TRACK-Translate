@@ -15,7 +15,26 @@
 ##### Automatische Erkennung und Übersetzung. 
 #### Benötigt [DeepL API Free Konto](https://www.deepl.com/de/pro-api?cta=checkout-pro)
 ### [DeelP API](https://github.com/Morpheus2018/HA-17TRACK-Translate/tree/main/deepl_api_translation)
-##### [Markdown DeepL 1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi1.yaml) | [Markdown DeepL 2](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi2.yaml) | [Packages](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml)  
+
+* ##### [Markdown DeepL 1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi1.yaml) Inhalt:
+   - [Switch Update](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi1.yaml#L10)
+   - [Ziel Sprache Auswahl](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi1.yaml#L10)
+   - [In Zustellung](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi1.yaml#L19)
+   - [Zugestellt](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi1.yaml#L43)
+   - [Paket zur Abholung Bereit](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi1.yaml#L66)
+* ##### [Markdown DeepL 2](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi2.yaml) Inhalt: 
+  - [Packet nicht gefunden](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi2.yaml#L5)
+  - [Abgelaufende Pakete](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi2.yaml#L29)
+  - [Paket nicht zugestellt](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi2.yaml#L60)
+  - [Pakete zurückgesendet](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi2.yaml#L84)
+* ##### [Packages](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml) Inhalt: 
+  - [Seventeentrack HA Configuration](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml#L4) 
+  - [Dropdown Ziel Sprachauswahl](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml#L10)
+  - [Automation](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml#L21)
+  - [Switch Update DeepL All Translation](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml#L97)
+  - [Sensor Rest POST DeepL](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml#L121)
+  - [Sensor Template](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml#L276)
+
 ##### Ersetze die [Authentifizierungsschlüssel](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml#L134)  für die DeepL-API in secrets.yaml
 ```
 Authorization: !secret deepl_apikey #Authentifizierungsschlüssel für die DeepL-API 
