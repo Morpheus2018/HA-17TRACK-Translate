@@ -10,10 +10,10 @@
   - [Zugestellt](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/markdown_1.yaml#L41)
   - [Paket zur Abholung Bereit](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/markdown_1.yaml#L62)
 * ##### [Markdown 2](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/markdown_2.yaml) Inhalt:
-  - [Packet nicht gefunden](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/markdown_2#L5)
-  - [Abgelaufende Pakete](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/markdown_2#L27)
-  - [Paket nicht zugestellt](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/markdown_2#L47)
-  - [Pakete zurückgesendet](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/markdown_2#L70)
+  - [Packet nicht gefunden](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/markdown_2.yaml#L5)
+  - [Abgelaufende Pakete](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/markdown_2.yaml#L27)
+  - [Paket nicht zugestellt](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/markdown_2.yaml#L47)
+  - [Pakete zurückgesendet](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/markdown_2.yaml#L70)
 
 #### Passe oder Ergänze weitere Ereignisse zu deiner Paketverfolgung
 ```
