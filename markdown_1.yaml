@@ -49,7 +49,8 @@ cards:
        **{{ package.friendly_name }} ([{{ package.tracking_number }}](https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?piececode={{package.tracking_number }})):** 
        {% set info_text = package.info_text %}
        {% if info_text == "The shipment has been successfully delivered" %} Die Lieferung wurde erfolgreich zugestellt 
-       {% elif info_text == "Delivered."%}Geliefert {% elif info_text == "Englisch"%}Überzetzung 
+       {% elif info_text == "Delivered."%}Geliefert 
+       {% elif info_text == "Englisch"%}Überzetzung 
        {% elif info_text == "Englisch"%}Überzetzung 
        {% elif info_text == "Englisch"%}Überzetzung 
        {% else %}{{ package.info_text }} {% endif %} {{ package.location }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr. 
