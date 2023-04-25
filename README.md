@@ -18,7 +18,7 @@
 
 * ##### [Markdown DeepL 1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi1.yaml) Inhalt:
    - [Switch Update](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi1.yaml#L10)
-   - [Ziel Sprache Auswahl](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi1.yaml#L10)
+   - [Ziel Sprache Auswahl](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi1.yaml#L14)
    - [In Zustellung](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi1.yaml#L19)
    - [Zugestellt](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi1.yaml#L43)
    - [Paket zur Abholung Bereit](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi1.yaml#L66)
@@ -26,7 +26,7 @@
   - [Packet nicht gefunden](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi2.yaml#L5)
   - [Abgelaufende Pakete](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi2.yaml#L29)
   - [Paket nicht zugestellt](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi2.yaml#L60)
-  - [Pakete zurückgesendet](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi2.yaml#L84)
+  - [Pakete zurückgesendet](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/Markdown_combi2.yaml#L77)
 * ##### [Packages](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml) Inhalt: 
   - [Seventeentrack HA Configuration](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml#L4) 
   - [Dropdown Ziel Sprachauswahl](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/deepl_translation_packages.yaml#L10)
