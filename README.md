@@ -79,4 +79,4 @@ input_select:
         initial: DE
         icon: mdi:earth
 ```
-![DeepL API Translation](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/deepl_api_translation.png)
+![DeepL API Translation](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/png/deepl_api_translation.gif)
