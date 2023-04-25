@@ -1,0 +1,82 @@
+type: vertical-stack
+cards:
+  - type: markdown
+    content: >
+      {% if states('sensor.seventeentrack_packages_in_transit') | int == 0 %} 
+      ## <center><font color="#44739e">Keine Pakete in Zustellung</font></center>{% else %} 
+      ## <center> <font color="#fdd835">In Zustellung</font></center>{% endif %}
+
+      ***
+
+      {% if states('sensor.seventeentrack_packages_in_transit') == '0' %}Keine Pakete.{% else %} 
+      {% for package in states.sensor.seventeentrack_packages_in_transit.attributes.packages %}
+      **{{ package.friendly_name }} ([{{ package.tracking_number }}](https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?piececode={{package.tracking_number }})):** 
+      {% set info_text = package.info_text %}
+
+      {% if info_text == "The shipment has been loaded onto the delivery vehicle" %}Die Sendung wurde in das Zustellfahrzeug geladen. 
+      {% elif info_text == "The shipment has been processed in the parcel center of origin"%}Die Sendung wurde im Ursprungspaketzentrum bearbeitet. 
+      {% elif info_text == "The shipment arrived in the region of recipient and will be transported to the delivery base in the next step."%}Die Sendung ist in der Empfängerregion angekommen und wird im nächsten Schritt zur Zustellbasis transportiert. 
+      {% elif info_text == "The shipment has been processed in the parcel center of origin"%}Die Sendung wurde im Ursprungspaketzentrum bearbeitet. 
+      {% elif info_text == "Pick-up was successful"%}Die Sendung wurde abgeholt. 
+      {% elif info_text == "The shipment has been posted by the sender at the retail outlet"%}Die Sendung wurde vom Absender in der Filiale eingeliefert. 
+      {% elif info_text == "The instruction data for this shipment have been provided by the sender to DHL electronically"%}Die Auftragsdaten für diese Sendung wurden vom Absender elektronisch an DHL übermittelt. 
+      {% elif info_text == "Departed from facility"%}Einrichtung verlassen. 
+      {% elif info_text == "The parcel data was entered into GLS IT system; the parcel was not yet handed over to GLS"%}Die Paketdaten wurden in das IT-System von GLS eingegeben; das Paket wurde noch nicht an GLS übergeben. 
+      {% elif info_text == "CHINA, SHENZHEN, Departed Sunyou Facility"%}CHINA, SHENZHEN, Verlassen der Sunyou-Anlage  
+      {% elif info_text == "Pre-Shipment Info Sent to Germany"%}Informationen vor dem Versand nach Deutschland gesendet {% elif info_text == "In transit."%}Unterwegs 
+      {% elif info_text == "CHINA, SHANGHAI, Acceptance, Sent to Germany"%}CHINA, SHANGHAI, Abnahme, Versand nach Deutschland 
+      {% elif info_text == "HONG KONG, Departed HONG KONG Airport"%}HONGKONG,  Abflug vom Flughafen HONGKONG
+      {% elif info_text  == "Germany, Arrived at Destination Country Airport"%}Deutschland, Ankunft am Flughafen des Ziellandes
+      {% elif info_text == "GMTC, Arrived"%}GMTC, In Transitland  Angekommen.
+      {% elif info_text == "GMTC, Departed"%}GMTC, In Transitland  Abgefahren. 
+      {% elif info_text == "Out for delivery."%}Zur Auslieferung bereit.
+      {% elif info_text == "Englisch"%}Überzetzung 
+      {% else %}{{ package.info_text }}{% endif %} {{ package.location }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
+
+      ***
+
+      {% endfor %} {% endif %}
+
+
+      {% if states('sensor.seventeentrack_packages_delivered') | int == 0 %} 
+      ## <center> <font color="#44739e">Zugestellt</font></center>{% else %} 
+      ## <center> <font color="green">Zugestellt</font></center>{% endif %}
+
+      ***
+       
+       {% if states('sensor.seventeentrack_packages_delivered') == '0' %}Keine Pakete.{% else %}
+       {% for package in states.sensor.seventeentrack_packages_delivered.attributes.packages %}
+       **{{ package.friendly_name }} ([{{ package.tracking_number }}](https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?piececode={{package.tracking_number }})):** 
+       {% set info_text = package.info_text %}
+       {% if info_text == "The shipment has been successfully delivered" %} Die Lieferung wurde erfolgreich zugestellt 
+       {% elif info_text == "Delivered."%}Geliefert {% elif info_text == "Englisch"%}Überzetzung 
+       {% elif info_text == "Englisch"%}Überzetzung 
+       {% elif info_text == "Englisch"%}Überzetzung 
+       {% else %}{{ package.info_text }} {% endif %} {{ package.location }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr. 
+
+        ***
+        
+       {% endfor %}
+       {% endif %}
+
+      {% if states('sensor.seventeentrack_packages_ready_to_be_picked_up') | int == 0 %}
+      ## <center>  <font color="#44739e">Pakete zur Abholung bereit</font></center> {% else %}
+      ## <center> <font color="#fdd835">Pakete zur Abholung bereit</font></center>{% endif %}
+
+       ***
+
+       {% if states('sensor.seventeentrack_packages_ready_to_be_picked_up') == '0' %}Keine Pakete.{% else %}
+       {% for package in states.sensor.seventeentrack_packages_ready_to_be_picked_up.attributes.packages %}
+       **{{ package.friendly_name }} ([{{ package.tracking_number }}](https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?piececode={{package.tracking_number }})):** 
+       {% set info_text = package.info_text %}
+       {% if info_text == "Ready to be Picked Up" %}Bereit zur Abholung
+       {% elif info_text == "Out for delivery."%}Zur Auslieferung bereit.
+       {% elif info_text == "Englisch"%}Überzetzung
+       {% elif info_text == "Englisch"%}Überzetzung
+       {% elif info_text == "Englisch"%}Überzetzung
+       {% elif info_text == "Englisch"%}Überzetzung
+       {% else %}{{ package.info_text }}{% endif %} {{ package.location }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
+
+        ***
+
+       {% endfor %} {% endif %}

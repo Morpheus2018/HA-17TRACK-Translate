@@ -1,0 +1,90 @@
+type: vertical-stack
+cards:
+  - type: markdown
+    content: >
+      {% if states('sensor.seventeentrack_packages_not_found') | int == 0 %}
+      ## <center>  <font color="#44739e">Paket nicht gefunden</font></center> {% else %}
+      ## <center> <font color="red">Paket nicht gefunden</font></center>{% endif %}
+
+       ***
+
+       {% if states('sensor.seventeentrack_packages_not_found') == '0' %}Keine Pakete.{% else %}
+       {% for package in states.sensor.seventeentrack_packages_not_found.attributes.packages %}
+       **{{ package.friendly_name }} ([{{ package.tracking_number }}](https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?piececode={{package.tracking_number }})):**
+       {% set status = package.status %}
+
+       {% if status == "Not Found" %}Nicht Gefunden
+       {% elif status == "The package was not found"%}Das Paket wurde nicht gefunden
+       {% elif status == "Englisch"%}Überzetzung
+       {% elif status == "Englisch"%}Überzetzung
+       {% elif status == "Englisch"%}Überzetzung
+       {% else %}{{ package.status }}{% endif %} {{ package.location }}
+
+        ***
+
+       {% endfor %} {% endif %}
+    
+      {% if states('sensor.seventeentrack_packages_expired')  | int == 0 %}
+      ## <center> <font color="#44739e">Abgelaufene Pakete</font></center> {% else %}
+      ## <center> <font color="red">Abgelaufen Pakete</font></center>{% endif %}
+
+       ***
+
+       {% if states('sensor.seventeentrack_packages_expired') == '0' %}Keine Pakete.{% else %}
+       {% for package in states.sensor.seventeentrack_packages_expired.attributes.packages %}
+       **{{ package.friendly_name }} ([{{ package.tracking_number }}](https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?piececode={{package.tracking_number }})):**{% set status = package.status %}
+       {% if status == "The package has expired" %}Das Paket ist Abgelaufen
+       {% elif status == "Expired"%}Abgelaufen
+       {% elif status == "Englisch"%}Überzetzung
+       {% elif status == "Englisch"%}Überzetzung
+       {% elif status == "Englisch"%}Überzetzung
+       {% else %}{{ package.status }}{% endif %} {{ package.location }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
+
+        ***
+
+       {% endfor %} {% endif %}
+
+      {% if states('sensor.seventeentrack_packages_undelivered') | int == 0 %}
+      ## <center> <font color="#44739e">Pakete nicht zugestellt</font></center> {% else %}
+      ## <center> <font color="red">Pakete nicht zugestellt</font></center>{% endif %}
+
+       ***
+
+       {% if states('sensor.seventeentrack_packages_undelivered') == '0' %}Keine Pakete.{% else %}
+       {% for package in states.sensor.seventeentrack_packages_undelivered.attributes.packages %}
+       **{{ package.friendly_name }} ([{{ package.tracking_number }}](https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?piececode={{package.tracking_number }})):**
+       {% set status = package.status %}
+
+       {% if status == "undelivered" %}Nicht Geliefert
+       {% elif status == "The package was not delivered"%}Das Paket wurde nicht geliefert
+       {% elif status == "Englisch"%}Überzetzung
+       {% elif status == "Englisch"%}Überzetzung
+       {% elif status == "Englisch"%}Überzetzung
+       {% else %}{{ package.status }}{% endif %} {{ package.location }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
+
+        ***
+
+       {% endfor %} {% endif %}
+
+
+      {% if states('sensor.seventeentrack_packages_returned')  | int == 0 %}
+      ## <center>  <font color="#44739e">Pakete zurückgesendet</font></center> {% else %}
+      ## <center> <font color="#fdd835">Pakete zurückgesendet</font></center>{% endif %}
+
+       ***
+
+       {% if states('sensor.seventeentrack_packages_returned') == '0' %}Keine Pakete.{% else %}
+       {% for package in states.sensor.seventeentrack_packages_returned.attributes.packages %}
+       **{{ package.friendly_name }} ([{{ package.tracking_number }}](https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?piececode={{package.tracking_number }})):**
+       {% set status = package.status %}
+
+       {% if status == "Returned" %}Pakete zurückgesendet
+       {% elif status == "The package has been returned"%}Das Paket wurde retourniert
+       {% elif status == "Englisch"%}Überzetzung
+       {% elif status == "Englisch"%}Überzetzung
+       {% elif status == "Englisch"%}Überzetzung
+       {% else %}{{ package.status }}{% endif %} {{ package.location }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
+
+        ***
+
+       {% endfor %} {% endif %}
