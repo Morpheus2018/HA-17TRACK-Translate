@@ -1,0 +1,21 @@
+type: markdown
+content: >-
+  {% if states('sensor.seventeentrack_packages_expired')  | int == 0 %} 
+  ## <center> <font color="#44739e">Abgelaufene Pakete</font></center> {% else %}
+  ## <center> <font color="red">Abgelaufen Pakete</font></center>{% endif %}
+
+  ***
+
+  {% if states('sensor.seventeentrack_packages_expired') == '0' %} Keine Pakete. 
+  {% elif states('sensor.deepl_translation_expired') == 'unknown' %} Keine Übersetzung. {% else %}
+
+  {% for translations in states.sensor.deepl_translation_expired.attributes.translations %} 
+  {% set null = translations.text %} {% if null == "Keine" %} {% elif null == "Keine\n "%} {% else %} 
+
+  {{ translations.text }}
+   
+  ***
+     
+      {% endif %}
+    {% endfor %}
+  {% endif %}

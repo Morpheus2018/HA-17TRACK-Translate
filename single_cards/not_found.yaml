@@ -1,0 +1,25 @@
+type: vertical-stack
+cards:
+  - type: markdown
+    content: >
+      {% if states('sensor.seventeentrack_packages_not_found') | int == 0 %}
+      ## <center>  <font color="#44739e">Paket nicht gefunden</font></center> {% else %}
+      ## <center> <font color="red">Paket nicht gefunden</font></center>{% endif %}
+
+       ***
+
+       {% if states('sensor.seventeentrack_packages_not_found') == '0' %}Keine Pakete.{% else %}
+       {% for package in states.sensor.seventeentrack_packages_not_found.attributes.packages %}
+       **{{ package.friendly_name }} ([{{ package.tracking_number }}](https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?piececode={{package.tracking_number }})):**
+       {% set status = package.status %}
+
+       {% if status == "Not Found" %}Nicht Gefunden
+       {% elif status == "The package was not found"%}Das Paket wurde nicht gefunden
+       {% elif status == "Englisch"%}Überzetzung
+       {% elif status == "Englisch"%}Überzetzung
+       {% elif status == "Englisch"%}Überzetzung
+       {% else %}{{ package.status }}{% endif %} {{ package.location }}
+
+       ***
+
+       {% endfor %} {% endif %}

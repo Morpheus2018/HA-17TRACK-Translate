@@ -1,0 +1,23 @@
+type: vertical-stack
+cards:
+  - type: markdown
+    content: >
+      {% if states('sensor.seventeentrack_packages_expired')  | int == 0 %}
+      ## <center> <font color="#44739e">Abgelaufene Pakete</font></center> {% else %}
+      ## <center> <font color="red">Abgelaufen Pakete</font></center>{% endif %}
+
+       ***
+
+       {% if states('sensor.seventeentrack_packages_expired') == '0' %}Keine Pakete.{% else %}
+       {% for package in states.sensor.seventeentrack_packages_expired.attributes.packages %}
+       **{{ package.friendly_name }} ([{{ package.tracking_number }}](https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?piececode={{package.tracking_number }})):**{% set status = package.status %}
+       {% if status == "The package has expired" %}Das Paket ist Abgelaufen
+       {% elif status == "Expired"%}Abgelaufen
+       {% elif status == "Englisch"%}Überzetzung
+       {% elif status == "Englisch"%}Überzetzung
+       {% elif status == "Englisch"%}Überzetzung
+       {% else %}{{ package.status }}{% endif %} {{ package.location }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
+
+       ***
+
+       {% endfor %} {% endif %}

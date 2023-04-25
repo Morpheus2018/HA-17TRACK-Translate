@@ -1,0 +1,21 @@
+type: markdown
+content: >-
+  {% if states('sensor.seventeentrack_packages_undelivered') | int == 0 %} 
+  ## <center> <font color="#44739e">Pakete nicht zugestellt</font></center> {% else %} 
+  ## <center> <font color="red">Pakete nicht zugestellt</font></center>{% endif %}
+
+  ***
+
+  {% if states('sensor.seventeentrack_packages_undelivered') == '0' %} Keine Pakete. 
+  {% elif states('sensor.deepl_translation_undelivered') == 'unknown' %} Keine Übersetzung. {% else %}
+
+  {% for translations in states.sensor.deepl_translation_undelivered.attributes.translations %} 
+  {% set null = translations.text %} {% if null == "Keine" %} {% elif null == "Keine\n "%} {% else %} 
+
+  {{ translations.text }}
+   
+  ***
+     
+      {% endif %}
+    {% endfor %}
+  {% endif %}

@@ -1,0 +1,25 @@
+type: vertical-stack
+cards:
+  - type: markdown
+    content: >
+      {% if states('sensor.seventeentrack_packages_undelivered') | int == 0 %}
+      ## <center> <font color="#44739e">Pakete nicht zugestellt</font></center> {% else %}
+      ## <center> <font color="red">Pakete nicht zugestellt</font></center>{% endif %}
+
+       ***
+
+       {% if states('sensor.seventeentrack_packages_undelivered') == '0' %}Keine Pakete.{% else %}
+       {% for package in states.sensor.seventeentrack_packages_undelivered.attributes.packages %}
+       **{{ package.friendly_name }} ([{{ package.tracking_number }}](https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?piececode={{package.tracking_number }})):**
+       {% set status = package.status %}
+
+       {% if status == "undelivered" %}Nicht Geliefert
+       {% elif status == "The package was not delivered"%}Das Paket wurde nicht geliefert
+       {% elif status == "Englisch"%}Überzetzung
+       {% elif status == "Englisch"%}Überzetzung
+       {% elif status == "Englisch"%}Überzetzung
+       {% else %}{{ package.status }}{% endif %} {{ package.location }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
+
+       ***
+
+       {% endfor %} {% endif %}

@@ -1,0 +1,26 @@
+type: vertical-stack
+cards:
+  - type: markdown
+    content: >
+      {% if states('sensor.seventeentrack_packages_returned')  | int == 0 %}
+      ## <center>  <font color="#44739e">Pakete zurückgesendet</font></center> {% else %}
+      ## <center> <font color="#fdd835">Pakete zurückgesendet</font></center>{% endif %}
+
+       ***
+
+       {% if states('sensor.seventeentrack_packages_returned') == '0' %}Keine Pakete.{% else %}
+       {% for package in states.sensor.seventeentrack_packages_returned.attributes.packages %}
+       **{{ package.friendly_name }} ([{{ package.tracking_number }}](https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?piececode={{package.tracking_number }})):**
+       {% set status = package.status %}
+
+       {% if status == "Returned" %}Pakete zurückgesendet
+       {% elif status == "The package has been returned"%}Das Paket wurde retourniert
+       {% elif status == "Englisch"%}Überzetzung
+       {% elif status == "Englisch"%}Überzetzung
+       {% elif status == "Englisch"%}Überzetzung
+       {% else %}{{ package.status }}{% endif %} {{ package.location }} am {{ as_timestamp(package.timestamp) | timestamp_custom('%d.%m.%y %H:%M') }} Uhr.
+
+       ***
+
+       {% endfor %} 
+       {% endif %}
