@@ -35,7 +35,7 @@
 
 * ##### [Markdown DeepL 1](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/markdown_combi1.yaml) Inhalt:
    - [Switch Update](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/markdown_combi1.yaml#L10)
-   - [Ziel Sprache Auswahl](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/markdown_combi1.yaml#L14) (custom:mushroom-select-card)
+   - [Ziel Sprache Auswahl](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/markdown_combi1.yaml#L14)  
    - [In Zustellung](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/markdown_combi1.yaml#L19)
    - [Zugestellt](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/markdown_combi1.yaml#L43)
    - [Paket zur Abholung Bereit](https://github.com/Morpheus2018/HA-17TRACK-Translate/blob/main/deepl_api_translation/markdown_combi1.yaml#L66)
